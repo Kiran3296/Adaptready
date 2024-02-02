@@ -1,13 +1,16 @@
 ####### Testcase for https://www.wipo.int/patinformed/ #############
 
-from selenium.webdriver import Chrome
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from datetime import datetime
 import re
 
-driver = Chrome()
+driver_path = "../drivers/chromedriver.exe"
+service = Service(driver_path)
+driver = webdriver.Chrome(service=service)
 wait = WebDriverWait(driver, 10)
 driver.get("https://www.wipo.int/patinformed/")
 assert driver.title == 'Pat-INFORMED',"Defect"    #Page title verification
@@ -34,7 +37,6 @@ if filing < publication:
 else:
     print("Invalid Date")
 driver.close()
-
 
 
 
